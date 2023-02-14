@@ -61,7 +61,8 @@ export function App() {
             label: `${item.firstName} ${item.lastName}`,
           })}
           onChange={async (newValue) => {
-            if (newValue === null) {
+            if (newValue === null || newValue?.id === "") {
+              await loadAllTransactions()
               return
             }
 
@@ -82,7 +83,7 @@ export function App() {
                 await loadAllTransactions()
               }}
             >
-              View More
+              {paginatedTransactions?.nextPage === null ? "Go Back" : "View More"}
             </button>
           )}
         </div>
